@@ -79,6 +79,8 @@ app.post("/api/savePostPic",upload.single("file"),async(req,res)=>{
         })
         .catch((err)=>{
           console.log("error during save post",err)
+        })
+      }
 
         //  ----------------------delete file from localspace
         fs.unlink(req.file.path,(err)=>{
