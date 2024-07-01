@@ -19,8 +19,9 @@ const Navbar = () => {
     useEffect(()=>{
         setUsername(localStorage.getItem("username"))
         if(cookies.token){
-        setUsername(jwtDecode(cookies.token).username)
-        setUseremail(jwtDecode(cookies.token).email)
+        // setUsername(jwtDecode(cookies.token).username)
+        // setUseremail(jwtDecode(cookies.token).email)
+        // -----------------------just edited
         // setUserProfilePic(jwtDecode(cookies.token).profilepic)
         axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/userPic",{username})
         .then((e)=>{
