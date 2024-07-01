@@ -23,7 +23,7 @@ const fs = require("fs")
 PORT= 3000
 app.use(bodyParser.json())
 app.use(cors({
-  origin: ["http://localhost:5173"],
+  origin: ["https://social-media-mern-frontend.vercel.app"],
   methods: ["GET", "POST"],
   credentials: true,
 }))
