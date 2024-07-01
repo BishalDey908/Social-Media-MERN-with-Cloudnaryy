@@ -82,7 +82,7 @@ app.post("/api/savePostPic",upload.single("file"),async(req,res)=>{
 
        // ---------------cloudnary image link upload on mongodb
        if(uploadResult){
-       postModel.findOneAndUpdate({postName:name},{postImg:uploadResult})
+       postModel.findOneAndUpdate({postName:name},{postImg:optimizeUrl})
        .then(()=>{
          console.log("image saved successfully")
         })
