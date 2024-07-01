@@ -23,7 +23,7 @@ const Registration = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        axios.post("https://social-media-mern-with-cloudnaryy.vercel.app/api/reg",{username,email,password})
+        axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/reg",{username,email,password})
         .then((e)=>{
             if(e.data==="User created successfully!"){
                 alert(e.data);
