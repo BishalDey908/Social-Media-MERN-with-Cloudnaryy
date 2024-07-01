@@ -17,6 +17,7 @@ const notificationModel = require("./NotificationModel")
 const friendRequestAcceptModel = require("./firendApprovedModel")
 const cloudinary = require("cloudinary").v2
 const fs = require("fs")
+require("dotenv").config()
 
 
 
@@ -34,9 +35,9 @@ app.get("/",(req,res)=>{
 
 // ---------------------------cloudnary config
 cloudinary.config({ 
-  cloud_name: 'dzk2q7sk2', 
-  api_key: '444757616646991', 
-  api_secret: 'g_Obvh9aXZWRkA3UN9trWyjp334' // Click 'View Credentials' below to copy your API secret
+  cloud_name: process.env.cloud_name, 
+  api_key: process.env.api_key, 
+  api_secret: process.env.api_secret // Click 'View Credentials' below to copy your API secret
 });
 
 // ----------------------------------------------------post storage setting
