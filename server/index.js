@@ -65,16 +65,26 @@ app.post("/api/savePostPic",upload.single("file"),async(req,res)=>{
   // ---------------cloudnary upload
   const uploadResult = await cloudinary.uploader
        .upload(
-           req.file.path
+           req.file.path,{
+            public_id: 'shoes',
+           }
        )
        .catch((error) => {
            console.log("error from cloudnary",error);
        });
        console.log("cloudnary file URL",uploadResult)
 
+       //otimize pic-------------------------
+       const optimizeUrl = cloudinary.url('shoes', {
+        fetch_format: 'auto',
+        quality: 'auto'
+    });
+    
+    console.log(optimizeUrl);
+
        // ---------------cloudnary image link upload on mongodb
        if(uploadResult){
-       postModel.findOneAndUpdate({postName:name},{postImg:uploadResult.secure_url})
+       postModel.findOneAndUpdate({postName:name},{postImg:optimizeUrl.secure_url})
        .then(()=>{
          console.log("image saved successfully")
         })
