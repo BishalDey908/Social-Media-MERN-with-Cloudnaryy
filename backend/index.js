@@ -72,13 +72,13 @@ app.post("/api/savePostPic",upload.single("file"),async(req,res)=>{
        console.log("cloudnary file URL",uploadResult)
 
        // ---------------cloudnary image link upload on mongodb
+       if(uploadResult){
        postModel.findOneAndUpdate({postName:name},{postImg:uploadResult.secure_url})
        .then(()=>{
          console.log("image saved successfully")
         })
         .catch((err)=>{
           console.log("error during save post",err)
-        })
 
         //  ----------------------delete file from localspace
         fs.unlink(req.file.path,(err)=>{
