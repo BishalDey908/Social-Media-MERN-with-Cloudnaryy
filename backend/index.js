@@ -68,7 +68,7 @@ app.post("/api/savePostPic",upload.single("file"),async(req,res)=>{
            req.file.path
        )
        .catch((error) => {
-           console.log(error);
+           console.log("error from cloudnary",error);
        });
        console.log("cloudnary file URL",uploadResult)
 
