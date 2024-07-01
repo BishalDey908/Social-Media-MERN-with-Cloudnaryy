@@ -89,28 +89,28 @@ const Create = () => {
   }
  
   //------------------------------------------handle video
-  const handleVideo = (e) =>{
-    e.preventDefault()
-    const isVideo= true
-    setUsername(localStorage.getItem("username"))
+  // const handleVideo = (e) =>{
+  //   e.preventDefault()
+  //   const isVideo= true
+  //   setUsername(localStorage.getItem("username"))
     
-    //----------------------------------------create pic
-    const date = new Date()
-    const modDate = date.toLocaleString()
-    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/createPost",{postname,username,modDate,isVideo})
-    .then(()=>{
-      alert("POST CREATED SUCCESS")
-      // console.log(cookies)
+  //   //----------------------------------------create pic
+  //   const date = new Date()
+  //   const modDate = date.toLocaleString()
+  //   axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/createPost",{postname,username,modDate,isVideo})
+  //   .then(()=>{
+  //     alert("POST CREATED SUCCESS")
+  //     // console.log(cookies)
       
-    })
-    .catch((err)=>{
-      alert("POST NOT CREATED",err)
-    })
+  //   })
+  //   .catch((err)=>{
+  //     alert("POST NOT CREATED",err)
+  //   })
 
     
-    savepost()
-    saveuserpic(postname)
-  }
+  //   savepost()
+  //   saveuserpic(postname)
+  // }
 
   useEffect(()=>{
     if(username){
