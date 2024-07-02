@@ -18,9 +18,11 @@ const Navbar = () => {
 
     useEffect(()=>{
         setUsername(localStorage.getItem("username"))
-        if(cookies.token){
-        setUsername(jwtDecode(cookies.token).username)
-        setUseremail(jwtDecode(cookies.token).email)
+        if(username){
+        // setUsername(jwtDecode(cookies.token).username)
+        // setUseremail(jwtDecode(cookies.token).email)
+
+        // --------------------------------
         // setUserProfilePic(jwtDecode(cookies.token).profilepic)
         axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/userPic",{username})
         .then((e)=>{
@@ -30,7 +32,7 @@ const Navbar = () => {
     })
         }else{
             console.log(username)
-            setUsername(false)
+            // setUsername(false)
             setUseremail(false)
             setUserProfilePic(false)
         }
