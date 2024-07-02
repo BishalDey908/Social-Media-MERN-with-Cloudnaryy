@@ -141,13 +141,13 @@ const Home = () => {
     <Navbar/>
     <Sidebar/>
     
-    <div  className='h-[100%] ml-52 mt-20'>
+    <div  className='h-[100%] xl:ml-52 md:mx-24 mt-20'>
       <section className='-mx-0 flex mt-[-25px] '>
       <div className='flex gap-3 pt-20 pl-28 '>
       <div className="relative  max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-xl cursor-pointer">
   <img
     src={robot}
-    className="w-36 h-45 transition rounded-xl duration-300 ease-in-out hover:scale-110"
+    className="w-36 h-45  transition rounded-xl duration-300 ease-in-out hover:scale-110"
     alt="Louvre" 
     onClick={()=>handleToggle(robot)}
     />
@@ -230,7 +230,7 @@ const Home = () => {
           
         </div>
         
-        <div className='bg-white   w-80 relative  rounded-2xl  shadow-2xl shadow-slate-600 z-50'>
+        <div className='bg-white xl:block  w-80  relative  rounded-2xl  shadow-2xl shadow-slate-600 z-50 md:hidden'>
         <h1 className='text-xl mt-5 flex place-content-center text-gray-600'>ONLINE</h1>
           <div className='my-4 ml-4 mx-2 h-80 overflow-y-auto'>
           <OnlineCard/>
@@ -240,7 +240,7 @@ const Home = () => {
             
           
           
-          <div className='bg-pink-600 rounded-2xl mt-6 h-80  text-white pt-12 relative'> 
+          <div className='bg-pink-600 rounded-2xl mt-6 h-80 xl:block md:hidden  text-white pt-12 relative'> 
             <div className='mx-4 '>
             <div className='text-center'>
             <h1 className='text-2xl font-bold '>Birthdays</h1>
@@ -281,28 +281,28 @@ const Home = () => {
       
 
         
-      <div className='h-44 w-[500px] bg-white shadow-2xl shadow-gray-700 flex ml-[350px] my-4  rounded-3xl'>
+      <div className='xl:h-44 md:h-35 xl:w-[500px]  bg-white shadow-2xl shadow-gray-700 flex xl:ml-[350px] md:w-[400px] md:mx-56 my-4   rounded-3xl'>
       <div className=''>
       <div className='flex mx-6 my-6 gap-2'>
-        <img className='w-[38px] h-[38px] mr-2 rounded-full' src="https://cdn-icons-png.flaticon.com/128/3177/3177440.png" alt="" />
-        <input type="text" className='h-12 w-[420px] bg-slate-200 rounded-full px-2 text-base pl-3 focus:outline-0' placeholder='Whats on your mind?' />
+        <img className='xl:w-[38px] xl:h-[38px] md:h-[30px] md:mt-1 mr-2 rounded-full' src="https://cdn-icons-png.flaticon.com/128/3177/3177440.png" alt="" />
+        <input type="text" className='xl:h-12 xl:w-[420px] md:h-12 md:w-[350px] bg-slate-200 rounded-full px-2 text-base pl-3 focus:outline-0' placeholder='Whats on your mind?' />
       </div>
       <hr className='mx-6 flex gap-5' />
-        <div className='my-6 mx-24 flex gap-3 '>
+        <div className='my-6 xl:mx-24 md:mx-20 flex xl:gap-3 md:gap-2 '>
         <div className='flex '>
-          <FaVideo className='text-4xl text-red-400 '/>
-          <h1 className='mx-2 my-1.5 text-black'>Live Video</h1>
+          <FaVideo className='xl:text-4xl md:text-2xl text-red-400 '/>
+          <h1 className='mx-2 xl:my-1.5 text-black'>Live Video</h1>
           </div>
 
           <div className='flex'>
-          <IoMdPhotos className='text-4xl text-green-400 '/>
-          <h1 className='mx-2 my-1.5 text-black'>Post Photos</h1>
+          <IoMdPhotos className='xl:text-4xl md:text-2xl text-green-400 '/>
+          <h1 className='mx-2 xl:my-1.5 text-black'>Post Photos</h1>
           </div>
           {/* FaSmile */}
 
           <div className='flex'>
-          <FaSmile className='text-4xl text-yellow-400 cursor-pointer'/>
-          <h1 className='mx-2 my-1.5 text-black'>Reaction</h1>
+          <FaSmile className='xl:text-4xl md:text-2xl text-yellow-400 cursor-pointer'/>
+          <h1 className='mx-2 xl:my-1.5 text-black'>Reaction</h1>
           </div>
         </div>
         </div>
@@ -320,7 +320,7 @@ const Home = () => {
 {/* <!-- Main modal --> */}
 {
     toggle && (
-<div id="default-modal" tabindex="-1" aria-hidden="true" className=" overflow-y-auto overflow-x-hidden fixed flex my-auto   z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full backdrop-blur-sm ">
+<div id="default-modal" tabindex="-1" aria-hidden="true" className=" overflow-y-auto overflow-x-hidden fixed flex my-auto   z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)]  max-h-full backdrop-blur-sm ">
     <div className="relative p-4 w-full max-w-2xl max-h-full">
         {/* <!-- Modal content --> */}
         <div className="relative bg-white  shadow dark:bg-gray-700">
@@ -355,13 +355,13 @@ const Home = () => {
 
 
 
-      <section className='pb-10 mx-[350px] '>
+      <section className='pb-10 xl:mx-[350px] md:mx-56'>
       {
         
         postData.reverse().map((elem,key)=>(
           // eslint-disable-next-line react/jsx-key
           <>
-          <div key={key} className="bg-white shadow-2xl shadow-gray-600 rounded-xl w-[500px] mt-4 pb-2">
+          <div key={key} className="bg-white shadow-2xl shadow-gray-600 rounded-xl xl:w-[500px] md:w-[400px] mt-4 pb-2">
           {
             sharedUser &&
             <div className="flex items-center px-4 py-3 ">
