@@ -59,7 +59,7 @@ const Navbar = () => {
       const {sender,receaver,profilepic}=item
       console.log(sender,receaver,profilepic)
       try{
-        const response = await axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/accept",{sender,receaver,profilepic})
+        const response = await axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/accept",{sender,receaver,profilepic})
         if(response.data==="success"){
           alert("Friend request accepted")
           const sender =  item.sender
