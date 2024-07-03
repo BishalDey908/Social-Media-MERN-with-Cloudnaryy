@@ -195,6 +195,7 @@ app.post("/api/logout",(req,res)=>{
    userRegModel.findOneAndUpdate({username},{isLoggedIn})
    .then(()=>{
     console.log("isLoggedIn Changed")
+    res.json("Logout successfully")
    })
    .catch((err)=>console.log("Error in isLoggedIn",err))
 })
