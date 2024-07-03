@@ -50,7 +50,10 @@ const Sidebar = () => {
         .then((e)=>{
             console.log("succes to change isLoggedIn");
             if(e.data==="Logout successfully")
-                localStorage.removeItem("username")
+                {
+                localStorage.clear()
+                console.log("localstorage cleared")
+                }
         })
         .catch(()=>{
             console.log("error in change in isLoggedIn");
