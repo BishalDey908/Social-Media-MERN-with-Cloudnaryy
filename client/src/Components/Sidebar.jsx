@@ -45,18 +45,19 @@ const Sidebar = () => {
     }
 
     const handleLogout = () =>{
-        const isLoggedIn = false
-        axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/logout",{username,isLoggedIn})
-        .then(()=>{
-            console.log("succes to change isLoggedIn");
-            localStorage.removeItem("username")
-        })
-        .catch(()=>{
-            console.log("error in change in isLoggedIn");
-        })
-        removeCookie("token")
-        console.log("all ok")
-        navigate("/login")
+        // const isLoggedIn = false
+        // axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/logout",{username,isLoggedIn})
+        // .then(()=>{
+        //     console.log("succes to change isLoggedIn");
+            
+        // })
+        // .catch(()=>{
+        //     console.log("error in change in isLoggedIn");
+        // })
+        // removeCookie("token")
+        // console.log("all ok")
+        // navigate("/login")
+        localStorage.removeItem("username")
     }
     
     useEffect(()=>{
