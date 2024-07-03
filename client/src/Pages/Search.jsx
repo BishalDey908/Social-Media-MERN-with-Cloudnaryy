@@ -1,80 +1,187 @@
-import { useEffect, useState } from "react"
-import ProfileCard from "../Components/ProfileCard"
-import axios from "axios"
-import Sidebar from "../Components/Sidebar"
-import Navbar from "../Components/Navbar"
-import { RiH1 } from "react-icons/ri"
-import { FaMagnifyingGlass } from "react-icons/fa6"
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import { jwtDecode } from "jwt-decode"
+import { useNavigate } from "react-router-dom";
+import Sidebar from "../Components/Sidebar";
+import Navbar from "../Components/Navbar";
 
-const Search = () => {
+
+
+
+
+const Create = () => {
+
+  const[img,setImg]=useState("")
+  const[postname,setPostName]=useState("")
+  const[username,setUsername]=useState("")
+  const[userPic,setUserPic]=useState("")
+  const [cookies, setCookie,removeCookie] = useCookies(['token']);
+  const [file,setFile] = useState("")
+  const navigate = useNavigate()
+   
+
+  useState(()=>{
+    setUsername(localStorage.getItem("username"))
+  },[username,setUsername])
+
+   
+
+  console.log("this is",username)
+  console.log("this is image",img)
   
-  // const [searchQuerry,setSearchQuerry] = useState("")
-  const [userData,setUserData] = useState([])
-
-  const handleButton = (e) =>{
-    const searchQuerry = e.target.value
-    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/search",{searchQuerry})
-    .then((e)=>{
-      // console.log(e.data)
-      setUserData(e.data)
-      if(e.data === "No such user exists!"){
-        alert(e.data);
-      }
+  // ------------------------------------save post pic
+  const savepost = async() =>{
+    const formdata = new FormData()
+    formdata.append("file",file)
+    await axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/savePostPic",formdata)
+    .then(()=>{
+      console.log("data created success")
     })
     .catch((err)=>{
-      console.log("error in search",err)
+      console.log(err)
     })
-    // console.log(searchQuerry)
   }
 
+  //----------------------------------save user pic
+  const saveuserpic = async(postname) =>{
+    await axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/userPic",{username})
+    .then((e)=>{
+      console.log("user profile picture found",e.data.profilePic)
+      console.log("postname",postname)
+      const userpic = e.data.profilePic
+      axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/saveuserpic",{userpic,postname})
+      .then(()=>{
+        console.log("Profile Picture has been saved for this Post.")
+      })
+      .catch((err)=>{
+        console.log("error in Profile Picture saved for this Post.",err)
+      })
+    })
+    .catch(()=>{
+      alert("error in find the user pic")
+    })
+  }
 
-  
-   
+  //----------------------------------handle create
+  const handleSubmit = (e) =>{
+    e.preventDefault()
+    const isVideo= false
+    setUsername(localStorage.getItem("username"))
     
+    //----------------------------------------create pic
+    const date = new Date()
+    const modDate = date.toLocaleString()
+    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/createPost",{postname,username,modDate,isVideo})
+    .then(()=>{
+      alert("POST CREATED SUCCESS")
+      // console.log(cookies)
+      navigate("/home")
+    })
+    .catch((err)=>{
+      alert("POST NOT CREATED",err)
+    })
 
+    
+    savepost()
+    saveuserpic(postname)
+    
+  }
+ 
+  //------------------------------------------handle video
+  // const handleVideo = (e) =>{
+  //   e.preventDefault()
+  //   const isVideo= true
+  //   setUsername(localStorage.getItem("username"))
+    
+  //   //----------------------------------------create pic
+  //   const date = new Date()
+  //   const modDate = date.toLocaleString()
+  //   axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/createPost",{postname,username,modDate,isVideo})
+  //   .then(()=>{
+  //     alert("POST CREATED SUCCESS")
+  //     // console.log(cookies)
+      
+  //   })
+  //   .catch((err)=>{
+  //     alert("POST NOT CREATED",err)
+  //   })
+
+    
+  //   savepost()
+  //   saveuserpic(postname)
+  // }
+
+  useEffect(()=>{
+    if(username){
+      axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/userPic",{username})
+     .then((e)=>{
+       setUserPic(e.data)
+       console.log("Send username",userPic)
+       
+     })
+     .catch((err)=>{
+      console.log(err)
+     })
+    }
+  },[img])
   
 
-  
 
   return (
-    <>
-    <Navbar />
-    <Sidebar />
-    <div className="2xl:h-[100vh] h-[100vh] md:h-[100vh]   2xl:px-48 2xl:mt-32 xl:px-56 xl:mt-32 lg:px-56 lg:mt-28 md:px-60">
-      
-      
-      
-
-    <div className="flex  rounded-xl mt-4 shadow-md  xl:mx-32 lg:ml-24  ">
-    <div className="bg-white ">
-    <FaMagnifyingGlass className='2xl:block xl:block lg:block md:block hidden ml-6 mt-4 text-2xl text-cyan-700'/>
-    </div>
-    <input className="w-full 2xl:block xl:block lg:block md:block hidden rounded p-2 h-14 pl-4 focus:outline-0 bg-white" type="text" placeholder="find your friends" name="searchQuerry" onChange={handleButton}/>
-
+    <div className="">
+     <Navbar/>
+     
+    <div className="w-[40vw] ">
     
-    </div>
+      {/* <!-- component --> */}
+      <Sidebar/>
 
-    <div className="bg-white flex w-[85vw] md:w-[350px]  ml-10 border border-black 2xl:hidden xl:hidden lg:hidden md:hidden block mt-24">
-    <FaMagnifyingGlass className='2xl:hidden xl:hidden lg:hidden md:hidden block ml-6 mt-4 text-2xl text-cyan-700 bg-white'/>
-    <input className="2xl:hidden xl:hidden lg:hidden md:hidden block w-full  rounded p-2 h-14 pl-4 focus:outline-0 bg-white" type="text" placeholder="find your friends" name="searchQuerry" onChange={handleButton}/>
-    </div>
+<div className="bg-grey-lighter min-h-screen flex flex-col 2xl:w-[50vw] 2xl:pb-36 xl:ml-96 xl:mt-16 lg:ml-[200px] lg:mt-16 md:ml-44   ">
+
+            <div className="container 2xl:max-w-sm 2xl:mx-auto flex-1 flex flex-col 2xl:items-center 2xl:justify-center 2xl:px-2 ">
+                <div className="bg-cyan-700 px-6 py-8 rounded w-[80vw] my-auto mx-[25%] text-black 2xl:w-full 2xl:mt-80 2xl:mr-2 xl:w-[655px]  shadow-2xl shadow-gray-800 xl:my-64 lg:my-64 md:w-[540px]  lg:mr-72 md:mr-96 md:mt-60 " >
+                    <h1 className="mb-8 text-3xl text-center">Create a Post</h1>
+
+                    <input 
+                        type="text"
+                        className="block border border-grey-light w-full p-3 rounded mb-4"
+                        name="description"
+                        placeholder="Description"
+                         onChange={(e)=>setPostName(e.target.value)}
+                         />
+                   <input className="block border border-grey-light w-full p-3 rounded mb-4"
+                   type="file"
+                    name="file" 
+                    id="" 
+                   onChange={(e)=>setFile(e.target.files[0])
+                   }/>
 
 
-    <div className="flex flex-wrap place-content-center gap-4 mt-6  lg:ml-16 xl:mr-10 ">
-      {
-        
-        userData.map((data)=>(
+<div className="flex place-content-center">
+{/* <button type="button" className="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium text-2xl  rounded-lg  px-5 py-2.5 text-center me-2 mb-2" >Get Notished</button> */}
 
-         // eslint-disable-next-line react/jsx-key
-         <ProfileCard userdata={data} />
-        )) 
-      }
+<a href="#_" className="relative inline-block px-4 py-3 h-12 text-center text-xl w-40 font-medium group" onClick={handleSubmit}>
+<span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
+<span className="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
+<span className="relative text-black group-hover:text-white">Post</span>
+</a>
+
+</div>
+
+
+
+                    
+
+                </div>
+
+                
+            </div>
+        </div>
     </div>
     </div>
-    </>
     
-    
-  )
-}
+  );
+};
 
-export default Search
+export default Create;
