@@ -4,6 +4,8 @@ import { RiVerifiedBadgeFill } from "react-icons/ri";
 import axios from 'axios';
 import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
+import { FiLogOut } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
 const Profile = () => {
 
   const [username,setUsername] =useState("")
@@ -15,6 +17,8 @@ const Profile = () => {
   const [userBio,setUserBio]=useState("")
   const [friendCount,setFriendCount]=useState("")
   const[friendList,setFriendList]=useState([])
+
+  const navigate = useNavigate()
 
   // const handleBio = () =>{
   //   console.log(userBio)
@@ -151,6 +155,10 @@ const Profile = () => {
   // }
   // data()
 
+  const changeAccount = () =>{
+    navigate("/login")
+  }
+
 
   return (
     <>
@@ -215,6 +223,9 @@ const Profile = () => {
           <div className='flex gap-2'>
           <h1 className='text-3xl text-gray-600'>{username}</h1>
           <RiVerifiedBadgeFill className='text-3xl text-blue-800'/>
+          <button className="ml-8 bg-slate-600 px-4 rounded-xl py-2 text-white" onClick={changeAccount}>
+             change Account
+             </button>
           </div>
           {/* <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleButton}>Edit Bio</button> */}
           </div>
@@ -225,9 +236,9 @@ const Profile = () => {
           </div >
             <h2 className='text-gray-600'>{bio}</h2>
           </div>
-
-          
         </section>
+
+        
         <hr  className='mx-44 my-9 text-black'/>
         <section>
           <div className='flex place-content-center text-black'>
