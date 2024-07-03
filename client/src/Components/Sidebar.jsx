@@ -44,6 +44,10 @@ const Sidebar = () => {
         navigate("/login")
     }
 
+    function clearData(){
+        localStorage.clear();
+    }
+
     const handleLogout = () =>{
         const isLoggedIn = false
         axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/logout",{username,isLoggedIn})
@@ -56,7 +60,7 @@ const Sidebar = () => {
         removeCookie("token")
         console.log("all ok")
         navigate("/login")
-        localStorage.clear()
+        clearData()
         console.log("localstorage cleared")
     }
     
