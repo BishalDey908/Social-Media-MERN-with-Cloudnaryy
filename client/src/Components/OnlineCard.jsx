@@ -6,7 +6,7 @@ const OnlineCard = () => {
     const [loginUsers,setLoginUsers] = useState([])
 
     useEffect(()=>{
-        axios.get("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/loginuser")
+        axios.get("http://localhost:3000/api/loginuser")
         .then((loginuser)=>{
             setLoginUsers(loginuser.data)
         })

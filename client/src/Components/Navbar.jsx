@@ -21,10 +21,8 @@ const Navbar = () => {
         if(username){
         // setUsername(jwtDecode(cookies.token).username)
         // setUseremail(jwtDecode(cookies.token).email)
-
-        // --------------------------------
         // setUserProfilePic(jwtDecode(cookies.token).profilepic)
-        axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/userPic",{username})
+        axios.post("http://localhost:3000/api/userPic",{username})
         .then((e)=>{
       console.log("this is for profilepic",e.data)
       setUserProfilePic(e.data.profilePic)
@@ -42,7 +40,7 @@ const Navbar = () => {
     const handleNotification = () =>{
      setNotification(!notification)
      localStorage.setItem("notification",notification)
-     axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/showfriendrequests",{username})
+     axios.post("http://localhost:3000/showfriendrequests",{username})
       .then((e)=>{
         // console.log("this is for friend requests",e.data)
         setNotiFiData(e.data)
@@ -59,12 +57,12 @@ const Navbar = () => {
       const {sender,receaver,profilepic}=item
       console.log(sender,receaver,profilepic)
       try{
-        const response = await axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/accept",{sender,receaver,profilepic})
+        const response = await axios.post("http://localhost:3000/accept",{sender,receaver,profilepic})
         if(response.data==="success"){
           alert("Friend request accepted")
           const sender =  item.sender
       const receaver =  item.receaver
-      axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/deletefriendrequests",{sender,receaver})
+      axios.post("http://localhost:3000/api/deletefriendrequests",{sender,receaver})
     .then(()=>{
       console.log("this friend request deleted")
     })
@@ -81,7 +79,7 @@ const Navbar = () => {
     const handledelete = (item) =>{
       const sender =  item.sender
       const receaver =  item.receaver
-      axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/deletefriendrequests",{sender,receaver})
+      axios.post("http://localhost:3000/api/deletefriendrequests",{sender,receaver})
     .then(()=>{
       console.log("this friend request deleted")
     })
@@ -91,7 +89,7 @@ const Navbar = () => {
     }
     
     const showfriendrequests = () =>{
-      axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/showfriendrequests",{username})
+      axios.post("http://localhost:3000/api/showfriendrequests",{username})
       .then((e)=>{
         // console.log("this is for friend requests",e.data)
         setNotiFiData(e.data)
@@ -109,25 +107,25 @@ const Navbar = () => {
 
   return (
     <div>
-      <div className='w-full h-24  bg-cyan-700 flex fixed z-50 place-content-between '>
+      <div id='navbar' className='w-full h-24  bg-cyan-700 flex fixed z-50 place-content-between '>
        
-       <div className='pt-6 flex'>
+       <div  className='pt-6 flex'>
       <img src={friendbook} alt="" className='h-12 ml-6 ' />
-      <div className='flex h-10  bg-white w-72 ml-6 py-2.5 rounded-full'>
+      <div id='searchSection' className='flex h-10  bg-white w-72 ml-6 py-2.5 rounded-full'>
         <input type="text" className='ml-4  focus:outline-0'/>
         <FaMagnifyingGlass className='ml-6'/>
       </div>
        </div>
 
-       <div className=' flex py-auto gap-4 pb-10 mr-10 mt-6'>
-        <div className='my-auto mr-2  '>
+       <div className=' flex py-auto xl:gap-4 md:gap-4  pb-10 mr-10 mt-6'>
+        <div id='bell1' className='my-auto mr-2  '>
          {/* <FaBell className='text-3xl text-yellow-500 cursor-pointer' onClick={handleNotification}/> */}
 
          <div className="relative " onClick={handleNotification}>
     <div className="absolute   bg-white w-6 h-6 rounded-full text-center">
        <span className="text-sm text-black p-1 ">{requests}</span>
     </div>
-    <div className="p-2">
+    <div  className="p-2">
            <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="yellow"
@@ -143,9 +141,9 @@ const Navbar = () => {
 
 
         </div>
-        <div className="flex items-center pt-2  text-white">
+        <div id='NavUsername' className="flex items-center pt-2  text-white">
             <div className="mr-5">
-                <div className="inline-block relative shrink-0 cursor-pointer rounded-[.95rem]">
+                <div id='NavProfilePic' className="inline-block relative shrink-0 cursor-pointer rounded-[.95rem]">
                 <img className="w-[40px] h-[40px] shrink-0 inline-block shadow-inner shadow-black rounded-full" src={userProfilePic ? userProfilePic : `https://imgs.search.brave.com/IZ7MIsbaofm0u4O4wocApdZPKT_2d0pLsAfOl1Nr0Bg/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/ZnJlZS1waG90by91/c2VyLXByb2ZpbGUt/ZnJvbnQtc2lkZV8x/ODcyOTktMzk1OTUu/anBnP3NpemU9NjI2/JmV4dD1qcGc`} alt="avatar image"/>
 
                 
@@ -156,6 +154,33 @@ const Navbar = () => {
                 {/* <div><img src={love} className="w-6 pt-1 heartbeat" /></div> */}
             </div>
             </div> 
+
+            {/* ------------------------------ */}
+            <div id='bell' className='my-auto mr-2 xl:hidden md:hidden '>
+         {/* <FaBell className='text-3xl text-yellow-500 cursor-pointer' onClick={handleNotification}/> */}
+
+         <div className="relative " onClick={handleNotification}>
+    <div className="absolute   bg-white w-6 h-6 rounded-full text-center">
+       <span className="text-sm text-black p-1 ">{requests}</span>
+    </div>
+    <div  className="p-2">
+           <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="yellow"
+        className="text-gray-600 w-10 h-8"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"
+        />
+      </svg>
+    </div>
+  </div>
+
+
+        </div>
+
+
        </div>
 
 

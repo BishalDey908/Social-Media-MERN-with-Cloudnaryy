@@ -31,7 +31,7 @@ const Profile = () => {
 
   useEffect(()=>{
     setUsername(localStorage.getItem('username'))
-    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/userPic",{username})
+    axios.post("http://localhost:3000/api/userPic",{username})
     .then((e)=>{
       console.log("this is for profilepic",e.data)
       setUserpic(e.data.profilePic)
@@ -45,7 +45,7 @@ const Profile = () => {
   },[username])
 
   useEffect(()=>{
-    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/userpost",{username})
+    axios.post("http://localhost:3000/api/userpost",{username})
     .then((e)=>{
       // console.log("Success to get user post",e.data)
       setPost(e.data)
@@ -57,7 +57,7 @@ const Profile = () => {
   },[username,post])
 
   useEffect(()=>{
-    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/showFriends",{username})
+    axios.post("http://localhost:3000/api/showFriends",{username})
     .then((data)=>{
       const resData = data.data
       // console.log(resData)
@@ -77,7 +77,7 @@ const Profile = () => {
     const user=username 
     console.log(user)
     
-      axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/setuserpic",{pic,user})
+      axios.post("http://localhost:3000/setuserpic",{pic,user})
       .then((e)=>{
         console.log("Userpic send success")
         sendmessaage(e.data)
@@ -91,7 +91,7 @@ const Profile = () => {
   const handleDelete = (post) =>{
     const postName = post.postName;
     console.log(postName)
-    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/deletePost",{postName,username})
+    axios.post("http://localhost:3000/api/deletePost",{postName,username})
       .then((e)=>{
         console.log("postId send success",e)
         // alert("post deleted")
@@ -110,7 +110,7 @@ const Profile = () => {
     setToggle(!toggle)
     const username = localStorage.getItem("username")
     console.log(username)
-    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/showFriendList",{username})
+    axios.post("http://localhost:3000/api/showFriendList",{username})
       .then((e)=>{
         console.log(e.data)
         setFriendList(e.data)
@@ -124,7 +124,7 @@ const Profile = () => {
   const handleUnfriend = (item) =>{
     const sender = item.senderName
     console.log(sender)
-    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/unFriend",{sender})
+    axios.post("http://localhost:3000/api/unFriend",{sender})
       .then((e)=>{
         if(e.data==="success")
         alert("unfriend")
@@ -205,10 +205,10 @@ const Profile = () => {
 
       <div className='h-[100%] text-white mt-24'>
       
-        <section className='flex place-content-center mx-60 gap-10'>
+        <section className='2xl:flex xl:flex lg:flex md:flex 2xl:place-content-center 2xl:mx-[555px] xl:mx-[400px] lg:mx-60 md:mx-[100px] mx-20 xl:gap-10'>
            
            
-            <img src={userpic} alt="" className='h-80 rounded-full w-80 shadow-2xl shadow-gray-600 hover:animate-ping hover:animate-once hover:animate-ease-linear' />
+            <img src={userpic} alt="" className='2xl:h-80 2xl:w-80 xl:h-80 xl:w-80 lg:h-80 lg:w-80 md:h-80 md:w-80 h-52 w-52 mx-auto rounded-full shadow-2xl shadow-gray-600 hover:animate-ping hover:animate-once hover:animate-ease-linear' />
           
           <div className='py-20'>
           <div className='flex gap-96'>
@@ -233,10 +233,10 @@ const Profile = () => {
           <div className='flex place-content-center text-black'>
             <h1>Posts</h1>
           </div>
-          <div className='flex place-content-center py-8 gap-6 flex-wrap mx-44'>
+          <div className='flex place-content-center py-8 gap-6 flex-wrap mx-36'>
           {
           post.map((post,index)=>(
-            <div key={index} className='hover:scale-110 transition-all duration-300  shadow-2xl shadow-black  bg-cyan-700 rounded-xl pb-10 my-4 mx-4 cursor-pointer'>
+            <div key={index} className='hover:scale-110 transition-all duration-300  shadow-2xl shadow-black  bg-cyan-700 rounded-xl pb-10 2xl:my-4 2xl:mx-4 xl:my-4 xl:mx-4 lg:my-4 lg:mx-4 md:my-4 md:mx-4  cursor-pointer'>
             <div  >
             <img  src={post.postImg} alt="" className='h-[400px] rounded-xl ' />
             </div>

@@ -23,7 +23,7 @@ const Registration = () => {
 
     const handleSubmit = (e) =>{
         e.preventDefault()
-        axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/reg",{username,email,password})
+        axios.post("http://localhost:3000/api/reg",{username,email,password})
         .then((e)=>{
             if(e.data==="User created successfully!"){
                 alert(e.data);
@@ -41,10 +41,10 @@ const Registration = () => {
   return (
         <>
          
-         <Sidebar />
         <div>
-      <section className="bg-gray-100">
-  <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+         <Sidebar />
+      <section id='regBackground' className="bg-gray-100">
+  <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen  lg:py-0">
       
       <div className=" w-full bg-white rounded-3xl  dark:border md:mt-0 sm:max-w-xl xl:p-10 shadow-2xl ">
       <a href="#" className="flex place-content-center items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">

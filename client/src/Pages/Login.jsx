@@ -16,7 +16,7 @@ const Login = () => {
     const handleSubmit = (e) =>{
         e.preventDefault()
         const isLoggedIn = true
-        axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/login",{username,password,isLoggedIn})
+        axios.post("http://localhost:3000/api/login",{username,password,isLoggedIn})
         .then((e)=>{
             console.log(e.data);
             if(e.data === "Login successfully"){
@@ -45,8 +45,8 @@ const Login = () => {
      
      <Sidebar />
      <div>
-      <section className="bg-gray-100">
-  <div className=" flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
+      <section id='loginformBackground' className="bg-gray-100 h-[100vh]">
+  <div id='loginform' className=" flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 ">
       
       <div className=" w-full bg-white rounded-3xl  dark:border md:mt-0 sm:max-w-xl xl:p-10 shadow-2xl ">
           

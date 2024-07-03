@@ -56,7 +56,7 @@ const Home = () => {
 
 
   useEffect(()=>{
-    axios.get("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/showPost")
+    axios.get("http://localhost:3000/api/showPost")
     .then((e)=>{
       // console.log(e.data)
       setPostData(e.data)
@@ -69,7 +69,7 @@ const Home = () => {
   const handleLike = async (elem) => {
     console.log(elem._id)
     try {
-      const response = await axios.post(`https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/${elem._id}/like`,{username});
+      const response = await axios.post(`http://localhost:3000/api/${elem._id}/like`,{username});
       setLikes(response.data.likes);
       console.log(response)
       if(response.data==="You have already liked this post")
@@ -94,7 +94,7 @@ const Home = () => {
 
   const handleSave = (elem) =>{
     let savePostUserName = localStorage.getItem("username")
-    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/saved",{elem,savePostUserName})
+    axios.post("http://localhost:3000/api/saved",{elem,savePostUserName})
     .then((res)=>{
       console.log("post saved")
       alert(res.data)
@@ -121,7 +121,7 @@ const Home = () => {
     console.log("this is image from share",img)
 
     
-    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/sharePost",{img,postname,username,modDate,userPic,sharedUser,sharedTime})
+    axios.post("http://localhost:3000/api/sharePost",{img,postname,username,modDate,userPic,sharedUser,sharedTime})
     .then(()=>{
       alert("POST shared SUCCESS")
       // console.log(cookies)
@@ -142,7 +142,7 @@ const Home = () => {
     <Sidebar/>
     
     <div  className='h-[100%] xl:ml-52 md:mx-24 mt-20'>
-      <section className='-mx-0 flex mt-[-25px] '>
+      <section id='storySection' className='-mx-0 flex mt-[-25px] '>
       <div className='flex gap-3 pt-20 pl-28 '>
       <div className="relative  max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-xl cursor-pointer">
   <img
@@ -223,14 +223,14 @@ const Home = () => {
       </div>
       {/* <img src={background} alt="" className='  h-96 ml-2 mb-10 ' /> */}
       
-        <div className='fixed  right-0 top-0 pt-32  h-[100%]  w-80 text-black mr-4 z-80'>
+        <div className='fixed  2xl:right-0 2xl:top-0   xl:right-[9%] xl:top-0 xl:translate-y-52 2xl:pt-0  lg:pt-36   h-[100%]  w-80 text-black mr-4 z-80'>
         
           <div className='flex flex-col '>
           <div className=' rounded-2xl fixed h-2/4 w-44'>
           
         </div>
         
-        <div className='bg-white xl:block  w-80  relative  rounded-2xl  shadow-2xl shadow-slate-600 z-50 md:hidden'>
+        <div id='onlinesection' className='bg-white xl:block sm:hidden  w-80  relative  rounded-2xl  shadow-2xl shadow-slate-600 z-50 md:hidden '>
         <h1 className='text-xl mt-5 flex place-content-center text-gray-600'>ONLINE</h1>
           <div className='my-4 ml-4 mx-2 h-80 overflow-y-auto'>
           <OnlineCard/>
@@ -240,7 +240,7 @@ const Home = () => {
             
           
           
-          <div className='bg-pink-600 rounded-2xl mt-6 h-80 xl:block md:hidden  text-white pt-12 relative'> 
+          <div id='birthdaySection' className='2xl:block xl:hidden bg-pink-600 rounded-2xl mt-6 h-80  md:hidden  text-white pt-12 relative '> 
             <div className='mx-4 '>
             <div className='text-center'>
             <h1 className='text-2xl font-bold '>Birthdays</h1>
@@ -256,52 +256,52 @@ const Home = () => {
             
           </div>
           </div>
-
         
-        
-
-
-        
-       
-
-        <div className='fixed bottom-0 ml-5 mb-5'>
-        <ul className='flex gap-2 '>
-          <li>Home</li>
-          <li>Home</li>
-          <li>Home</li>
-          <li>Home</li>
-        </ul>
-
-        <p>© 2024 NOSEBOOK FROM BISHAL</p>
         </div>
-        </div>
+        <div id='birthdaySection' className='2xl:hidden xl:block md:hidden   xl:fixed  xl:left-[16.5%] xl:top-0 xl:translate-y-48 xl:pt-36   h-[100%]  w-80 text-black mr-4 z-80'>
+        <div className='bg-pink-600 rounded-2xl mt-6 h-80   2xl:text-white pt-12 relative '> 
+            <div className='mx-4 '>
+            <div className='text-center'>
+            <h1 className='text-2xl font-bold '>Birthdays</h1>
+              <p className='font-bold'>Wishing him fast</p>
+            </div>
+              
+              <img src={girl1} alt="" className='h-24 rounded-xl mx-auto my-2' />
+              <div className='flex mt-4 gap-4'>
+               <FaGift className='text-3xl text-white'/>
+               <p className=''><span className='font-bold'>Tanushree Gharami</span> has their Birthday today</p>
+              </div>
+            </div>
+            
+          </div>
+          </div>
       </section>
 
 
       
 
         
-      <div className='xl:h-44 md:h-35 xl:w-[500px]  bg-white shadow-2xl shadow-gray-700 flex xl:ml-[350px] md:w-[400px] md:mx-56 my-4   rounded-3xl'>
+      <div id='inputStatusSection' className='xl:h-44 md:h-35 xl:w-[500px] lg:w-[440px] lg:ml-80  bg-white shadow-2xl shadow-gray-700 flex xl:ml-[350px] md:w-[400px] md:mx-56 my-4   rounded-3xl'>
       <div className=''>
       <div className='flex mx-6 my-6 gap-2'>
         <img className='xl:w-[38px] xl:h-[38px] md:h-[30px] md:mt-1 mr-2 rounded-full' src="https://cdn-icons-png.flaticon.com/128/3177/3177440.png" alt="" />
         <input type="text" className='xl:h-12 xl:w-[420px] md:h-12 md:w-[350px] bg-slate-200 rounded-full px-2 text-base pl-3 focus:outline-0' placeholder='Whats on your mind?' />
       </div>
       <hr className='mx-6 flex gap-5' />
-        <div className='my-6 xl:mx-24 md:mx-20 flex xl:gap-3 md:gap-2 '>
-        <div className='flex '>
-          <FaVideo className='xl:text-4xl md:text-2xl text-red-400 '/>
+        <div id='inputStatusSectionEmoji' className='my-6 xl:mx-24 md:mx-20 flex xl:gap-3 md:gap-2 '>
+        <div id='emojyBox' className='flex '>
+          <FaVideo id='emojy' className='xl:text-4xl  md:text-2xl text-red-400 '/>
           <h1 className='mx-2 xl:my-1.5 text-black'>Live Video</h1>
           </div>
 
-          <div className='flex'>
-          <IoMdPhotos className='xl:text-4xl md:text-2xl text-green-400 '/>
+          <div id='emojyBox' className='flex'>
+          <IoMdPhotos id='emojy' className='xl:text-4xl md:text-2xl text-green-400 '/>
           <h1 className='mx-2 xl:my-1.5 text-black'>Post Photos</h1>
           </div>
           {/* FaSmile */}
 
-          <div className='flex'>
-          <FaSmile className='xl:text-4xl md:text-2xl text-yellow-400 cursor-pointer'/>
+          <div id='emojyBox' className='flex'>
+          <FaSmile id='emojy' className='xl:text-4xl md:text-2xl text-yellow-400 cursor-pointer'/>
           <h1 className='mx-2 xl:my-1.5 text-black'>Reaction</h1>
           </div>
         </div>
@@ -355,13 +355,13 @@ const Home = () => {
 
 
 
-      <section className='pb-10 xl:mx-[350px] md:mx-56'>
+      <section id='post' className='pb-10 xl:mx-[350px] md:mx-56 lg:ml-80'>
       {
         
         postData.reverse().map((elem,key)=>(
           // eslint-disable-next-line react/jsx-key
           <>
-          <div key={key} className="bg-white shadow-2xl shadow-gray-600 rounded-xl xl:w-[500px] md:w-[400px] mt-4 pb-2">
+          <div key={key} className="bg-white shadow-2xl shadow-gray-600 rounded-xl xl:w-[500px] md:w-[400px] lg:w-[440px] mt-4 pb-2">
           {
             sharedUser &&
             <div className="flex items-center px-4 py-3 ">

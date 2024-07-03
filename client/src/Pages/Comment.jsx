@@ -17,7 +17,7 @@ const Comment = () => {
         const messageInput = document.getElementById("message-input");
         console.log("comment post ==> ",comment, username, postId)
 
-        axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/addcomment",{username,postId,comment,modDate})
+        axios.post("http://localhost:3000/api/addcomment",{username,postId,comment,modDate})
     .then((e)=>{
       console.log("post  added successfully");
       alert(e.data)
@@ -30,7 +30,7 @@ const Comment = () => {
 
     // useEffect(()=>{
         let postId = localStorage.getItem('postId')
-        axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/getcomment",{postId})
+        axios.post("http://localhost:3000/api/getcomment",{postId})
         .then((e)=>{
             // console.log(e.data)
             setCommentData(e.data)
@@ -46,9 +46,9 @@ const Comment = () => {
 
   return (
     <div className="h-[100vh]">
-    <div className="h-[86vh] bg-slate-900 overflow-y-auto">
+    <div className="h-[86vh]  overflow-y-auto px-20">
 <div className="pt-20 ">
-    <h1 className="text-2xl flex text-white mr-32 place-content-center mb-10 font-bold">Comment Section</h1>
+    <h1 className="text-2xl flex text-black mr-32 place-content-center mb-10 font-bold">Comment Section</h1>
 <div className="bg-blue-500 text-white p-4 w-[655px] ml-96 ">
     {
         commentData.reverse().map((item,index)=>(

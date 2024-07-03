@@ -34,7 +34,7 @@ const Create = () => {
   const savepost = async() =>{
     const formdata = new FormData()
     formdata.append("file",file)
-    await axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/savePostPic",formdata)
+    await axios.post("http://localhost:3000/api/savePostPic",formdata)
     .then(()=>{
       console.log("data created success")
     })
@@ -45,12 +45,12 @@ const Create = () => {
 
   //----------------------------------save user pic
   const saveuserpic = async(postname) =>{
-    await axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/userPic",{username})
+    await axios.post("http://localhost:3000/api/userPic",{username})
     .then((e)=>{
       console.log("user profile picture found",e.data.profilePic)
       console.log("postname",postname)
       const userpic = e.data.profilePic
-      axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/saveuserpic",{userpic,postname})
+      axios.post("http://localhost:3000/api/saveuserpic",{userpic,postname})
       .then(()=>{
         console.log("Profile Picture has been saved for this Post.")
       })
@@ -72,7 +72,7 @@ const Create = () => {
     //----------------------------------------create pic
     const date = new Date()
     const modDate = date.toLocaleString()
-    axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/createPost",{postname,username,modDate,isVideo})
+    axios.post("http://localhost:3000/api/createPost",{postname,username,modDate,isVideo})
     .then(()=>{
       alert("POST CREATED SUCCESS")
       // console.log(cookies)
@@ -114,7 +114,7 @@ const Create = () => {
 
   useEffect(()=>{
     if(username){
-      axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/userPic",{username})
+      axios.post("http://localhost:3000/api/userPic",{username})
      .then((e)=>{
        setUserPic(e.data)
        console.log("Send username",userPic)
@@ -140,7 +140,7 @@ const Create = () => {
 <div className="bg-grey-lighter min-h-screen flex flex-col w-[60vw]  pl-80 ml-80 pb-64 relative ">
 
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2 ">
-                <div className="bg-cyan-700 px-6 py-8 rounded text-black w-full shadow-2xl shadow-gray-800 " >
+                <div className="bg-cyan-700 px-6 py-8 rounded w-[455px] mr-[480px] my-80 text-black 2xl:w-full 2xl:mt-80 2xl:mr-2 xl:w-[655px] shadow-2xl shadow-gray-800 xl:my-64 lg:my-64 md:w-[540px] lg:mr-72 md:mr-96 md:mt-60 " >
                     <h1 className="mb-8 text-3xl text-center">Create a Post</h1>
 
                     <input 
