@@ -12,7 +12,7 @@ const Savepost = () => {
 
     useEffect(()=>{
         let username = localStorage.getItem( 'username' )
-        axios.post("http://localhost:3000/api/showsaved",{username})
+        axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/showsaved",{username})
         .then((data)=>{
             console.log("sdfsfsdf")
             console.log(data)
