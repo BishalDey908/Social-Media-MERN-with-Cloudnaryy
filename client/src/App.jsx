@@ -16,6 +16,9 @@ import Savepost from './Pages/Savepost'
 import Messenger  from './Pages/Messenger'
 import Firstpage from './Pages/Firstpage'
 import Navbar from './Components/Navbar'
+import ProtectFirstpage from "./Pages/ProtectFirstpage" 
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 
 
@@ -26,11 +29,11 @@ function App() {
   return (
     <>
       <BrowserRouter>
-      
+      <ToastContainer />
     <div className='area'>
         <Routes>
 
-        <Route path='/' element={<Firstpage/>} />
+        <Route path='/' element={<ProtectFirstpage/>} />
         <Route path='/home' element={<Home/>} />
         
           {/* <Route path='/createpost' element={<Create/>} /> */}

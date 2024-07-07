@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode"
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../Components/Sidebar";
 import Navbar from "../Components/Navbar";
+import { toast } from "react-toastify";
 
 
 
@@ -74,12 +75,13 @@ const Create = () => {
     const modDate = date.toLocaleString()
     axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/createPost",{postname,username,modDate,isVideo})
     .then(()=>{
-      alert("POST CREATED SUCCESS")
+      toast.success("POST CREATED SUCCESS")
       // console.log(cookies)
+      
       navigate("/home")
     })
     .catch((err)=>{
-      alert("POST NOT CREATED",err)
+      toast.error("POST NOT CREATED",err)
     })
 
     
@@ -141,16 +143,16 @@ const Create = () => {
 
             <div className="container 2xl:max-w-sm 2xl:mx-auto flex-1 flex flex-col 2xl:items-center 2xl:justify-center 2xl:px-2 ">
                 <div className="bg-cyan-700 px-6 py-8 rounded w-[80vw] my-auto mx-[25%] text-black 2xl:w-full 2xl:mt-80 2xl:mr-2 xl:w-[655px]  shadow-2xl shadow-gray-800 xl:my-64 lg:my-64 md:w-[540px]  lg:mr-72 md:mr-96 md:mt-60 " >
-                    <h1 className="mb-8 text-3xl text-center">Create a Post</h1>
+                    <h1 className="mb-8 text-3xl text-center font-head ">Create a Post</h1>
 
                     <input 
                         type="text"
-                        className="block border border-grey-light w-full p-3 rounded mb-4"
+                        className="block border border-grey-light w-full p-3 rounded mb-4 font-body"
                         name="description"
                         placeholder="Description"
                          onChange={(e)=>setPostName(e.target.value)}
                          />
-                   <input className="block border border-grey-light w-full p-3 rounded mb-4"
+                   <input className="block border border-grey-light w-full p-3 rounded mb-4 font-body"
                    type="file"
                     name="file" 
                     id="" 
@@ -164,7 +166,7 @@ const Create = () => {
 <a href="#_" className="relative inline-block px-4 py-3 h-12 text-center text-xl w-40 font-medium group" onClick={handleSubmit}>
 <span className="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
 <span className="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
-<span className="relative text-black group-hover:text-white">Post</span>
+<span className="relative text-black group-hover:text-white font-head">Post</span>
 </a>
 
 </div>

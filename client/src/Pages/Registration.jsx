@@ -8,6 +8,7 @@ import axios from "axios"
 import Navbar from '../Components/Navbar'
 import Sidebar from '../Components/Sidebar'
 import { FaFacebook } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 
 const Registration = () => {
     
@@ -26,11 +27,11 @@ const Registration = () => {
         axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/reg",{username,email,password})
         .then((e)=>{
             if(e.data==="User created successfully!"){
-                alert(e.data);
+                toast.success(e.data);
                 localStorage.setItem("username",username)
                 navigare("/home")
             }else{
-                alert(e.data)
+                toast.error(e.data)
             }
         })
         .catch((err)=>{
@@ -52,10 +53,10 @@ const Registration = () => {
              
       </a>
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8 " >
-              <h1 className=" flex place-content-center text-3xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+              <h1 className=" flex place-content-center text-3xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white font-head">
                   Create an account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#" method='POST' onSubmit={handleSubmit}>
+              <form className="space-y-4 md:space-y-6 font-body" action="#" method='POST' onSubmit={handleSubmit}>
               <div>
                       <label htmlFor="username" className="block mb-2 text-base font-medium text-gray-900 dark:text-white">Enter Your Username</label>
                       <input type="username" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-base rounded-full focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-zinc-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required="" onChange={(e)=>setUsername(e.target.value)}/>

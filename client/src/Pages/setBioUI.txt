@@ -33,3 +33,101 @@
 
     )
 }
+
+
+
+
+----------------------------logout UI
+{
+                !username ? <div className="  ">
+                {/* <button onClick={handleNavigate} className="before:ease relative h-12 w-32 overflow-hidden border border-teal-300 text-sky-900 shadow-2xl transition-all before:absolute before:top-1/2 before:h-0 before:w-64 before:origin-center before:-translate-x-20 before:rotate-45 before:bg-sky-900 before:duration-300 hover:text-white hover:shadow-blue-500 hover:before:h-64 hover:before:-translate-y-32">
+                <span className="relative z-10 font-bold " >Sign In</span>
+                 </button> */}
+                 
+                 <div className="select-none flex  place-content-center py-[.775rem] cursor-pointer my-[.4rem] gap-3 hover:bg-slate-400 rounded-xl h-16 pr-3 pt-4" onClick={handleNavigate2}>
+             <FiLogIn className="text-3xl text-white ml-2"/>
+                {/* <span className="relative z-10  text-2xl" >Log In</span> */}
+             </div>
+            </div> :
+             <div className="select-none flex  place-content-center py-[.775rem] cursor-pointer my-[.4rem] gap-3 hover:bg-slate-400 rounded-xl h-16 pr-3 pt-4" onClick={handleLogout}>
+             <FiLogOut className="text-3xl text-white ml-2"/>
+                {/* <span className="relative z-10  text-2xl" >Log Out</span> */}
+             </div>
+            }
+
+
+            -------------------------
+            <section className="bg-white  py-8 lg:py-16 antialiased h-screen ">
+  <div className="max-w-2xl mx-auto px-4">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-lg lg:text-2xl font-bold  text-blue-800">Discussion (20)</h2>
+    </div>
+    <form className="mb-6">
+        <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <label for="comment" className="sr-only">Your comment</label>
+            <textarea id="comment" rows="6"
+            onChange={(e)=>setComment(e.target.value)}
+                className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                placeholder="Write a comment..." required></textarea>
+        </div>
+        <button type="submit"
+            onClick={handleSubmit}
+            className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center bg-blue-800 text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800">
+            Post comment
+        </button>
+    </form>
+
+
+    
+    
+    {
+        commentData.reverse().map((item,index)=>(
+            <article key={index} className="p-6 text-base bg-blue-800 rounded-lg  ">
+        <footer className="flex justify-between items-center mb-2">
+            <div className="flex items-center">
+                <p className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white font-semibold">{item.username}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400"><time pubdate datetime="2022-02-08"
+                        title="February 8th, 2022">{item.date}</time></p>
+            </div>
+            
+            {/* <!-- Dropdown menu --> */}
+            
+        </footer>
+        <p className="text-gray-500 dark:text-gray-400">{item.comment}</p>
+        <div className="flex items-center mt-4 space-x-4">
+            
+        </div>
+    </article>
+        ))
+    }
+    
+  </div>
+</section>
+
+
+
+ <div className="h-[100vh]">
+    <div className="h-[86vh]  overflow-y-auto px-20">
+<div className="pt-20 ">
+    <h1 className="text-2xl flex text-black mr-32 place-content-center mb-10 font-bold">Comment Section</h1>
+<div className="bg-blue-500 text-white p-4 w-[655px] ml-96 ">
+    {
+        commentData.reverse().map((item,index)=>(
+    <div key={index} className="bg-white p-4 shadow-lg mt-4 rounded-lg ">
+    <h1 className="my text-black">User : {item.username} &nbsp; &nbsp; {item.date}</h1>
+        <p className="text-black py-2">{item.comment}</p>
+    </div>
+        ))
+    }
+
+    
+</div>
+</div>
+    <div>
+      <div className="flex items-center border border-blue-500 rounded-lg p-2 fixed bottom-0 w-[655px] ml-96 my-20 bg-white">
+    <input id="message-input" type="text" className="w-full outline-none text-gray-700" placeholder="Type your message..." onChange={(e)=>setComment(e.target.value)}/>
+    <button className="bg-blue-500 text-white px-4 py-2 ml-2 rounded-lg" onClick={handleSubmit}>Send</button>
+</div>
+    </div>
+    </div>
+    </div>

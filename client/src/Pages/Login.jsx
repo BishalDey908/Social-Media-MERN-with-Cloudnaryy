@@ -7,11 +7,19 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Navbar from '../Components/Navbar'
 import Sidebar from '../Components/Sidebar'
+import { toast } from 'react-toastify';
+
+
+
 const Login = () => {
     axios.defaults.withCredentials=true
     const[username,setUsername] = useState("")
     const[password,setPassword] = useState("")
     const navigate = useNavigate()
+
+
+    
+
 
     const handleSubmit = (e) =>{
         e.preventDefault()
@@ -20,18 +28,18 @@ const Login = () => {
         .then((e)=>{
             console.log(e.data);
             if(e.data === "Login successfully"){
-            alert(e.data)
+            toast.success(e.data)
             navigate("/home")
             localStorage.setItem("username",username)
             }
             if(e.data ==="Login unsuccessfully"){
-                alert("Password Incorrect")
+                toast.error("Password Incorrect")
                 navigate("/login")
             }if(e.data ==="Invalid Username or Password"){
-                alert("Invalid Username or Password")
+                toast.error("Invalid Username or Password")
                 navigate("/login")
             }if(e.data==="Invalid username or Password"){
-                alert("Username incorrect")
+                toast.error("Username incorrect")
             }
         })
         .catch((err)=>{
@@ -56,21 +64,21 @@ const Login = () => {
       </a>
 
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8  ">
-              <h1 className=" flex place-content-center text-3xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                 Login
+              <h1 className=" flex place-content-center text-3xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white font-head">
+                 Please Login
               </h1>
               <form className="space-y-4 md:space-y-6" method='POST' onSubmit={handleSubmit}>
               <div>
-                      <label htmlFor="username" className="block mb-2 text-base font-normal text-gray-900 dark:text-white">Your Username</label>
+                      <label htmlFor="username" className="block mb-2 text-base font-normal text-gray-900 dark:text-white font-body">Your Username</label>
                       <input type="username" name="username" id="username" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-base rounded-full focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-zinc-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="username" required="" onChange={(e)=>setUsername(e.target.value)}/>
                   </div>
                   <div>
-                      <label htmlFor="password" className="block mb-2 text-base font-medium text-gray-900 dark:text-white">Password</label>
+                      <label htmlFor="password" className="block mb-2 text-base font-medium text-gray-900 dark:text-white font-body">Password</label>
                       <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-base rounded-full focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-zinc-300 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="" onChange={(e)=>setPassword(e.target.value)}/>
                   </div>
                   
                   {/* type="submit" */}
-                  <div className=' flex flex-col place-content-center '>
+                  <div className=' flex flex-col place-content-center font-body'>
                     <div className='flex place-content-center p-3 text-sm' >
                         <p>Forgot Password ? </p>
                     </div>

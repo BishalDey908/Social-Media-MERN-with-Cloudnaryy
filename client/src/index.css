@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +10,7 @@
 .area {
     /* width:100%; */
     height: 100%;
-	 background-color: azure;
+	 /* background-color: azure; */
 }
 
 .bg{
@@ -43,7 +46,29 @@
     #loginformBackground,#regBackground{
         height: 100vh;
     }
+    #username1{
+        display: none;
+    }
+    #bell{
+        margin-top: 16px;
+    }
+    #posts{
+        margin-top: 550%;
+    }
+    #search{
+        margin-top: 40px;
+    }
+    #profile{
+        margin-top: 140px;
+    }
     
+    
+  }
+
+  @media(min-width:768px){
+    #username2{
+        display: none;
+    }
   }
 
 

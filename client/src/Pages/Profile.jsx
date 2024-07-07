@@ -6,17 +6,20 @@ import Sidebar from '../Components/Sidebar';
 import Navbar from '../Components/Navbar';
 import { FiLogOut } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import Loader2 from '../Components/Loader2';
+import Loader3 from '../Components/Loader3';
+import { toast } from 'react-toastify';
 const Profile = () => {
 
   const [username,setUsername] =useState("")
   const [userpic,setUserpic] =useState("")
   const [bio,setbio] =useState("")
-  const [post,setPost] =useState([])
+  const [post,setPost] =useState(null)
   const [postnumber,setPostNumber] =useState(0)
   const [toggle,setToggle]=useState(false)
   const [userBio,setUserBio]=useState("")
   const [friendCount,setFriendCount]=useState("")
-  const[friendList,setFriendList]=useState([])
+  const[friendList,setFriendList]=useState(null)
 
   const navigate = useNavigate()
 
@@ -58,7 +61,7 @@ const Profile = () => {
     .catch((err)=>{
       console.log(err)
     })
-  },[username,post])
+  },[username])
 
   useEffect(()=>{
     axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/showFriends",{username})
@@ -98,7 +101,7 @@ const Profile = () => {
     axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/deletePost",{postName,username})
       .then((e)=>{
         console.log("postId send success",e)
-        // alert("post deleted")
+        toast.success("post deleted")
       })
       .catch((err)=>{
         console.log("error",err)
@@ -131,7 +134,7 @@ const Profile = () => {
     axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/unFriend",{sender})
       .then((e)=>{
         if(e.data==="success")
-        alert("unfriend")
+        toast.success("unfriend")
       window.location.reload()
       })
       .catch((err)=>{
@@ -164,7 +167,7 @@ const Profile = () => {
     <>
     <Sidebar />
     <Navbar />
-     <div className='pt-10'>
+     <div  className='pt-10'>
       
 
       
@@ -183,9 +186,9 @@ const Profile = () => {
         <hr />
           {/* checktypeArray(friendList) && */}
         {
-          friendList.map((item, index) => (
+          friendList ? friendList.map((item, index) => (
             <div key={index} >
-            <div className='mx-10 my-4 flex justify-between '>
+            <div className='mx-10 my-4 flex justify-between font-head'>
             <div className='flex gap-2'>
               <img className='h-14 w-14 my-auto rounded-full' src={item.profilepic} alt=""  />
               <h1 className='text-2xl my-auto'>{item.senderName}</h1>
@@ -197,7 +200,7 @@ const Profile = () => {
             <hr className='mx-10'/>
             </div>
             
-          ))
+          )) : <Loader2/>
         }
         </div>
         <div className="bg-gray-50 px-4 py-3 sm:px-6 flex align-items justify-end p-4 gap-4 flex-row">
@@ -211,43 +214,46 @@ const Profile = () => {
       }
 
 
-      <div className='h-[100%] text-white mt-24'>
+      <div  className='h-[100%] text-white 2xl:mt-24 xl:mt-24 md:mt-24 mt-32'>
       
-        <section className='2xl:flex xl:flex lg:flex md:flex 2xl:place-content-center 2xl:mx-[555px] xl:mx-[400px] lg:mx-60 md:mx-[100px] mx-20 xl:gap-10'>
+        <section  className='2xl:flex xl:flex lg:flex md:flex 2xl:place-content-center 2xl:mx-[555px] xl:mx-[400px] lg:mx-60 md:mx-[100px] mx-20 xl:gap-10'>
            
-           
-            <img src={userpic} alt="" className='2xl:h-80 2xl:w-80 xl:h-80 xl:w-80 lg:h-80 lg:w-80 md:h-80 md:w-80 h-52 w-52 mx-auto rounded-full shadow-2xl shadow-gray-600 hover:animate-ping hover:animate-once hover:animate-ease-linear' />
+           <div className='md:mr-16 '>
+            {userpic ? <img id='profile' src={userpic} alt="" className='2xl:h-80 2xl:w-80 xl:h-80 xl:w-80 lg:h-80 lg:w-80 md:h-80 md:w-80 h-52 w-52 mx-auto rounded-full shadow-2xl shadow-gray-600 '/> : <Loader2/>} 
+           </div>
           
-          <div className='py-20'>
+          <div className='2xl:py-20 xl:py-20 md:py-20 py-6 '>
           <div className='flex gap-96'>
-          <div className='flex gap-2'>
-          <h1 className='text-3xl text-gray-600'>{username}</h1>
+          <div className='flex 2xl:flex xl:flex lg:flex md:flex flex-col gap-2 '>
+          <div className='flex  py-3 '>
+          <h1 className='text-3xl text-gray-600 font-head'>{username}</h1>
           <RiVerifiedBadgeFill className='text-3xl text-blue-800'/>
-          <button className="ml-8 bg-slate-600 px-4 rounded-xl py-2 text-white" onClick={changeAccount}>
+          </div>
+          <button className=" bg-slate-600 px-4 rounded-xl py-2 text-white font-body" onClick={changeAccount}>
              change Account
              </button>
           </div>
           {/* <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" onClick={handleButton}>Edit Bio</button> */}
           </div>
-          <div className='flex gap-5 my-2 text-gray-600'>
+          <div className='flex gap-5 my-2 text-gray-600 font-body text-lg font-bold'>
             <p>Posts {postnumber}</p>
             <p>Followers 155</p>
             <p onClick={handleButton}>Friends {friendCount}</p>
           </div >
-            <h2 className='text-gray-600'>{bio}</h2>
+            <h2 className='text-gray-600 font-body text-lg'>{bio}</h2>
           </div>
-        </section>
+        </section> 
 
         
         <hr  className='mx-44 my-9 text-black'/>
         <section>
           <div className='flex place-content-center text-black'>
-            <h1>Posts</h1>
+            <h1 className='font-head text-3xl'>Posts</h1>
           </div>
           <div className='flex place-content-center py-8 gap-6 flex-wrap mx-36'>
           {
-          post.map((post,index)=>(
-            <div key={index} className='hover:scale-110 transition-all duration-300  shadow-2xl shadow-black  bg-cyan-700 rounded-xl pb-10 2xl:my-4 2xl:mx-4 xl:my-4 xl:mx-4 lg:my-4 lg:mx-4 md:my-4 md:mx-4  cursor-pointer'>
+          post ? post.map((post,index)=>(
+            <div key={index} className=' transition-all duration-300  shadow-2xl shadow-black  bg-cyan-700 rounded-xl pb-10 2xl:my-4 2xl:mx-4 xl:my-4 xl:mx-4 lg:my-4 lg:mx-4 md:my-4 md:mx-4  cursor-pointer font-head'>
             <div  >
             <img  src={post.postImg} alt="" className='h-[400px] rounded-xl ' />
             </div>
@@ -267,7 +273,7 @@ const Profile = () => {
             </div>
             </div>
           
-        ))
+        )) : <Loader2/>
       }            
           </div>
         </section>

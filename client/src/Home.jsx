@@ -15,12 +15,15 @@ import { FaGift } from "react-icons/fa6";
 import Navbar from './Components/Navbar'
 import Sidebar from './Components/Sidebar'
 import Modal from './Components/Modal'
+import Loader from './Components/Loader'
+import { toast } from 'react-toastify'
 
 
 
 
 
 const Home = () => {
+  const [data, setData] = useState(null)
   const [postData,setPostData] = useState([])
   const [likes,setLikes] = useState(postData.likes)
   // const [postId,setPostId] = useState("")
@@ -29,6 +32,7 @@ const Home = () => {
   let [sharedUser,setSharedUser] = useState("")
   const[toggle,setToggle]=useState(false)
   const[seeStory,setSeeStory] = useState("")
+  const[postInfo,setPostInfo]=useState("")
   
   
   
@@ -60,11 +64,12 @@ const Home = () => {
     .then((e)=>{
       // console.log(e.data)
       setPostData(e.data)
+      setData(e.data)
     })
     .catch((err)=>{
       // console.log(err)
     })
-  },[postData])
+  },[username])
 
   const handleLike = async (elem) => {
     console.log(elem._id)
@@ -73,9 +78,9 @@ const Home = () => {
       setLikes(response.data.likes);
       console.log(response)
       if(response.data==="You have already liked this post")
-      alert(response.data)
+        toast.warning(response.data)
      if(response.data==="Post liked successfully")
-     alert(response.data)
+     toast.success(response.data)
     } catch (error) {
       console.error(error);
     }
@@ -97,7 +102,7 @@ const Home = () => {
     axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/saved",{elem,savePostUserName})
     .then((res)=>{
       console.log("post saved")
-      alert(res.data)
+      toast.success(res.data)
     })
     .catch((err)=>{
       console.log(err)
@@ -123,12 +128,12 @@ const Home = () => {
     
     axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/sharePost",{img,postname,username,modDate,userPic,sharedUser,sharedTime})
     .then(()=>{
-      alert("POST shared SUCCESS")
+      toast.success("POST shared SUCCESS")
       // console.log(cookies)
       
     })
     .catch((err)=>{
-      alert("POST NOT shared",err)
+      toast.error("POST NOT shared",err)
     })
   }
   
@@ -141,7 +146,7 @@ const Home = () => {
     <Navbar/>
     <Sidebar/>
     
-    <div  className='h-[100%] xl:ml-52 md:mx-24 mt-20'>
+    <div  className='h-[100%] xl:ml-52 md:mx-24 mt-20 '>
       <section id='storySection' className='-mx-0 flex mt-[-25px] '>
       <div className='flex gap-3 pt-20 pl-28 '>
       <div className="relative  max-w-xs overflow-hidden bg-cover bg-no-repeat rounded-xl cursor-pointer">
@@ -231,7 +236,7 @@ const Home = () => {
         </div>
         
         <div id='onlinesection' className='bg-white xl:block sm:hidden  w-80  relative  rounded-2xl  shadow-2xl shadow-slate-600 z-50 md:hidden '>
-        <h1 className='text-xl mt-5 flex place-content-center text-gray-600'>ONLINE</h1>
+        <h1 className='text-xl mt-5 flex place-content-center text-gray-600 font-head font-bold'>ONLINE</h1>
           <div className='my-4 ml-4 mx-2 h-80 overflow-y-auto'>
           <OnlineCard/>
           </div>
@@ -243,14 +248,14 @@ const Home = () => {
           <div id='birthdaySection' className='2xl:block xl:hidden bg-pink-600 rounded-2xl mt-6 h-80  md:hidden  text-white pt-12 relative '> 
             <div className='mx-4 '>
             <div className='text-center'>
-            <h1 className='text-2xl font-bold '>Birthdays</h1>
-              <p className='font-bold'>Wishing him fast</p>
+            <h1 className='text-2xl font-bold font-head'>Birthdays</h1>
+              <p className='font-bold font-head'>Wishing him fast</p>
             </div>
               
               <img src={girl1} alt="" className='h-24 rounded-xl mx-auto my-2' />
               <div className='flex mt-4 gap-4'>
                <FaGift className='text-3xl text-white'/>
-               <p className=''><span className='font-bold'>Tanushree Gharami</span> has their Birthday today</p>
+               <p className=''><span className='font-bold font-body'>Tanushree Gharami</span> has their Birthday today</p>
               </div>
             </div>
             
@@ -259,15 +264,15 @@ const Home = () => {
         
         </div>
         <div id='birthdaySection' className='2xl:hidden xl:block md:hidden   xl:fixed  xl:left-[16.5%] xl:top-0 xl:translate-y-48 xl:pt-36   h-[100%]  w-80 text-black mr-4 z-80'>
-        <div className='bg-pink-600 rounded-2xl mt-6 h-80   2xl:text-white pt-12 relative '> 
+        <div className='bg-pink-600 rounded-2xl mt-6 h-80   text-white pt-12 relative '> 
             <div className='mx-4 '>
-            <div className='text-center'>
+            <div className='text-center font-head'>
             <h1 className='text-2xl font-bold '>Birthdays</h1>
               <p className='font-bold'>Wishing him fast</p>
             </div>
               
               <img src={girl1} alt="" className='h-24 rounded-xl mx-auto my-2' />
-              <div className='flex mt-4 gap-4'>
+              <div className='flex mt-4 gap-4 font-body'>
                <FaGift className='text-3xl text-white'/>
                <p className=''><span className='font-bold'>Tanushree Gharami</span> has their Birthday today</p>
               </div>
@@ -281,7 +286,7 @@ const Home = () => {
       
 
         
-      <div id='inputStatusSection' className='xl:h-44 md:h-35 xl:w-[500px] lg:w-[440px] lg:ml-80  bg-white shadow-2xl shadow-gray-700 flex xl:ml-[350px] md:w-[400px] md:mx-56 my-4   rounded-3xl'>
+      <div id='inputStatusSection' className='xl:h-44 md:h-35 xl:w-[500px] lg:w-[440px] lg:ml-80  bg-white shadow-2xl shadow-gray-700 flex xl:ml-[350px] md:w-[400px] md:mx-56 my-4   rounded-3xl font-body'>
       <div className=''>
       <div className='flex mx-6 my-6 gap-2'>
         <img className='xl:w-[38px] xl:h-[38px] md:h-[30px] md:mt-1 mr-2 rounded-full' src="https://cdn-icons-png.flaticon.com/128/3177/3177440.png" alt="" />
@@ -352,26 +357,27 @@ const Home = () => {
 }
 
     </div>
+     
 
 
-
-      <section id='post' className='pb-10 xl:mx-[350px] md:mx-56 lg:ml-80'>
+      <section  className='pb-10 xl:mx-[350px] md:mx-56  lg:ml-80 2xl:mt-0 xl:mt-0 md:mt-0  mt-40 mb-20 mx-6'>
+      
       {
         
-        postData.reverse().map((elem,key)=>(
+         data ? postData.reverse().map((elem,key)=>(
           // eslint-disable-next-line react/jsx-key
           <>
-          <div key={key} className="bg-white shadow-2xl shadow-gray-600 rounded-xl xl:w-[500px] md:w-[400px] lg:w-[440px] mt-4 pb-2">
+          <div key={key}  className="bg-white shadow-2xl shadow-gray-600 rounded-xl xl:w-[500px] md:w-[400px] lg:w-[440px] mt-4  pb-2">
           {
             sharedUser &&
             <div className="flex items-center px-4 py-3 ">
       {/* <img className="h-16 w-16 rounded-full" src={elem.userPic}/> */}
       <div className="ml-3 ">
       <div className='flex gap-1'>
-        <span className=" font-semibold antialiased block leading-tight text-xl text-gray-600" >{elem.sharedUser} </span>
+        <span className=" font-semibold antialiased block leading-tight text-xl text-gray-600 font-head" >{elem.sharedUser} </span>
         <span className="text-xl font-semibold antialiased block leading-tight text-blue-600">{elem.sharedUser ? <MdVerified className='text-lime-200'/>: "" } </span>
       </div>
-      <span className="text-gray-600 text-xs block mt-1">{elem.sharedTime}</span>
+      <span className="text-gray-600 text-xs block mt-1 ">{elem.sharedTime}</span>
       </div>
       </div> 
 
@@ -387,10 +393,10 @@ const Home = () => {
       
       <div className="ml-3 ">
       <div className='flex gap-1'>
-        <span className=" font-semibold antialiased block leading-tight text-xl text-gray-600" >{elem.userName} </span>
+        <span className=" font-semibold antialiased block leading-tight text-xl text-gray-600 font-head" >{elem.userName} </span>
         <span className="text-xl font-semibold antialiased block leading-tight text-blue-600"><MdVerified className='text-lime-200'/> </span>
       </div>
-        <span className="text-gray-600 text-xs block mt-1">{elem.date}</span>
+        <span className="text-gray-600 text-xs block mt-1 ">{elem.date}</span>
         
       </div>
     </div>
@@ -398,7 +404,7 @@ const Home = () => {
     <div className="flex flex-col">
     <img src={``} alt="" srcset="" />
     <img src={elem.postImg} alt="" />
-    <span className="text-sm font-semibold antialiased block leading-tight my-2 mx-2 text-xl text-gray-600" >{elem.postName}</span>
+    <span className="text-sm font-semibold antialiased block leading-tight my-2 mx-2 text-xl text-gray-600 font-body" >{elem.postName}</span>
     </div>
     </div>
     <div className="flex items-center justify-between mx-4 mt-3 mb-2">
@@ -419,7 +425,8 @@ const Home = () => {
   </div>
   
           </>
-        ))
+        )):  <Loader/>  
+         
       }
       
 

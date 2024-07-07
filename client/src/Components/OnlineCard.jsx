@@ -4,6 +4,11 @@ import { useEffect, useState } from "react"
 
 const OnlineCard = () => {
     const [loginUsers,setLoginUsers] = useState([])
+    const [username,setUsername] = useState("")
+
+    useEffect(()=>{
+    setUsername(localStorage.getItem('username'))
+  },[setUsername])
 
     useEffect(()=>{
         axios.get("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/loginuser")
@@ -13,7 +18,7 @@ const OnlineCard = () => {
         .catch((err)=>{
             console.log("Error to fetch loggedIn user",err)
         })
-    },[loginUsers])
+    },[username])
 
     // console.log(loginUsers)
 
@@ -29,12 +34,12 @@ const OnlineCard = () => {
       <div className="flex items-center gap-4">
         <img src={users.profilePic} alt="Discord" className="h-14 w-14 rounded-xl" draggable="false" />
         <div>
-          <a target="_blank" rel="noopener noreferrer" href="https://discord.com"><h1 className="cursor-pointer font-normal text-[#060607] hover:underline dark:text-gray-700">{users.username}</h1></a>
+          <a target="_blank" rel="noopener noreferrer" href="https://discord.com"><h1 className="cursor-pointer font-normal text-[#060607] hover:underline dark:text-gray-700 font-body">{users.username}</h1></a>
           <div className="flex items-center justify-between gap-3 text-xs py-2">
             <p className="text-[#80848e]">
               <span className="inline-flex"
                 ><svg className="h-[11px] w-[11px] fill-[#02fb6a] " strokeWidth="0" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M256 23.05C127.5 23.05 23.05 127.5 23.05 256S127.5 488.9 256 488.9 488.9 384.5 488.9 256 384.5 23.05 256 23.05z"></path></svg
-              ><p className="ml-2 text-s text-gray-700">Online</p></span>
+              ><p className="ml-2 text-s text-gray-700 font-body">Online</p></span>
               
             </p>
           </div>

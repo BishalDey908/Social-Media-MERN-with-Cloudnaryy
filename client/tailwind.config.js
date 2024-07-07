@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily :{
+        head: ["Raleway"],
+        body:["Raleway"]
+      }
+    },
   },
   plugins: [
     // eslint-disable-next-line no-undef

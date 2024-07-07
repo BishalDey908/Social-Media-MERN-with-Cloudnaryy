@@ -44,15 +44,12 @@ const Sidebar = () => {
         navigate("/login")
     }
 
-    function clearData(){
-        localStorage.clear();
-    }
-
     const handleLogout = () =>{
         const isLoggedIn = false
         axios.post("https://social-media-mern-with-cloudnaryy-backend.onrender.com/api/logout",{username,isLoggedIn})
         .then(()=>{
-            console.log("succes to change isLoggedIn");    
+            console.log("succes to change isLoggedIn");
+            
         })
         .catch(()=>{
             console.log("error in change in isLoggedIn");
@@ -60,8 +57,7 @@ const Sidebar = () => {
         removeCookie("token")
         console.log("all ok")
         navigate("/login")
-        clearData()
-        console.log("localstorage cleared")
+        localStorage.clear();
     }
     
     useEffect(()=>{
@@ -87,6 +83,8 @@ const Sidebar = () => {
     const indicateClick = (data) =>{
         console.log(data.target)
     }
+
+    
     
   return (
     <>
@@ -98,7 +96,7 @@ const Sidebar = () => {
     </head>
     <body className="bg-blue 600 ">    
         <div id="sidebar" className="xl:block md:block  container flex  mx-auto bg-blue 600 ">
-            <aside className="flex flex-col w-[65px]  lg:h-[555px] bg-cyan-700 md:my-28 lg:my-28 xl:my-36 ml-10 rounded-xl  fixed  inset-y-0 left-0  shadow-2xl shadow-gray-600 " id="sidenav-main"><div className="flex shrink-0 px-8 items-center justify-between pt-[1px] ">
+            <aside className="flex flex-col w-[65px]  2xl:h-[455px] 2xl:my-auto xl:h-[460px] xl:my-auto lg:h-[460px] lg:my-auto md:h-[450px] md:my-auto bg-cyan-700 md:my-28  xl:my-36 ml-10 rounded-xl  fixed  inset-y-0 left-0  shadow-2xl shadow-gray-600 " id="sidenav-main"><div className="flex shrink-0 px-8 items-center justify-between pt-[1px] ">
             {/* <a className="transition-colors duration-200 ease-in-out" href="https://www.loopple.com">
             <img alt="Logo" src={logo} className="inline animate-wiggle animate-infinite animate-ease-out"/>
             </a> */}
@@ -172,22 +170,7 @@ const Sidebar = () => {
             </NavLink>
            
            
-            {
-                !username ? <div className="  ">
-                {/* <button onClick={handleNavigate} className="before:ease relative h-12 w-32 overflow-hidden border border-teal-300 text-sky-900 shadow-2xl transition-all before:absolute before:top-1/2 before:h-0 before:w-64 before:origin-center before:-translate-x-20 before:rotate-45 before:bg-sky-900 before:duration-300 hover:text-white hover:shadow-blue-500 hover:before:h-64 hover:before:-translate-y-32">
-                <span className="relative z-10 font-bold " >Sign In</span>
-                 </button> */}
-                 
-                 <div className="select-none flex  place-content-center py-[.775rem] cursor-pointer my-[.4rem] gap-3 hover:bg-slate-400 rounded-xl h-16 pr-3 pt-4" onClick={handleNavigate2}>
-             <FiLogIn className="text-3xl text-white ml-2"/>
-                {/* <span className="relative z-10  text-2xl" >Log In</span> */}
-             </div>
-            </div> :
-             <div className="select-none flex  place-content-center py-[.775rem] cursor-pointer my-[.4rem] gap-3 hover:bg-slate-400 rounded-xl h-16 pr-3 pt-4" onClick={handleLogout}>
-             <FiLogOut className="text-3xl text-white ml-2"/>
-                {/* <span className="relative z-10  text-2xl" >Log Out</span> */}
-             </div>
-            }
+            
 
 
             
