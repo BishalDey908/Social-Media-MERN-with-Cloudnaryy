@@ -7,7 +7,7 @@
             "use": "@vercel/node"
         }
     ],
-    {
+   {
   "headers": [
     {
       "source": "/api/(.*)",
@@ -20,5 +20,6 @@
     }
   ]
 }
+
 
 }
