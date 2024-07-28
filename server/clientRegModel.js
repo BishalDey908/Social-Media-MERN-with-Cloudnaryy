@@ -6,7 +6,7 @@ const userRegSchema = new mongoose.Schema({
     password: String,
     profilePic:{
         type:String,
-        default: "https://cdn-icons-png.flaticon.com/128/3177/3177440.png"
+        default: "https://res.cloudinary.com/dzk2q7sk2/image/upload/v1722159857/rjcq8rulrsagnod2c8mz.webp"
     },
     token:String,
     isLoggedIn:{
