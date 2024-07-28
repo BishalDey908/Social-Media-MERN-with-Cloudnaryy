@@ -23,7 +23,11 @@ require("dotenv").config()
 
 PORT= 3000
 app.use(bodyParser.json())
-app.use(cors())
+app.use(cors({
+  origin: ["https://socialfront-psi.vercel.app"],
+  methods: ["GET", "POST"],
+  credentials: true,
+}))
 
 app.get("/",(req,res)=>{
   res.send("hello")
